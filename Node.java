@@ -52,6 +52,46 @@ public class Node implements Comparable<Node> {
 
 
 
+    public Node fuse(Node other){
+        Node parent = new Node(null, this.getFreq() + other.getFreq());
+        parent.setRightChild(other);
+        parent.setLeftChild(this);
+        return parent;
+
+    }
+
+    public static Node create_abr(List<Node> l_node){
+
+        while (l_node.size()>1){
+            Boolean is_insert=false;
+            Node n1=l_node.get(0);
+
+            Node n2=l_node.get(1);
+            Node n3=n1.fuse(n2);
+            l_node.remove(n1);
+            l_node.remove(n2);
+            for(int i=0;i<l_node.size();i++){
+                if(l_node.get(i).getFreq()==n3.getFreq()){
+                    l_node.add(i,n3);
+                    is_insert=true;
+                    break;
+
+                }
+
+            }
+
+            if(!is_insert){
+                l_node.add(n3);
+            }
+            //Collections.sort(l_node);
+
+            //System.out.println(l_node);
+        }
+
+        return l_node.get(0);
+    }
+
+
 
 
 

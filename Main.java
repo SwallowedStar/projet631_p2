@@ -15,6 +15,8 @@ public class Main {
         Map<String,Integer>l_res=create_list_cara(content);
         //System.out.println(l_res);
         List<Node>l_node=create_list_node(l_res);
+        Node n=Node.create_abr(l_node);
+        //System.out.println(n);
 
 
     }
@@ -69,6 +71,7 @@ public class Main {
         System.out.println(l_node);
         return l_node;
     }
+
 
 
 }
