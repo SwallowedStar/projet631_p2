@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="50ee0b3c-cefa-49be-a113-d298a2e00ad3" name="Changes" comment="add some file" />
+    <list default="true" id="50ee0b3c-cefa-49be-a113-d298a2e00ad3" name="Changes" comment="remove some code">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/alice.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/extraitalice.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/textesimple.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet631_p2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet631_p2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet631_p2/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet631_p2/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet631_p2/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet631_p2/Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet631_p2/data/alice.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet631_p2/data/extraitalice.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet631_p2/data/textesimple.txt" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="first_try" />
+        <entry key="$PROJECT_DIR$" value="list_trie" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -30,22 +43,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/travail/projet631_p2",
-    "nodejs_package_manager_path": "npm"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/travail/gestion_concert&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\travail\projet631_p2\data" />
       <recent name="D:\travail\projet631_p2\" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\travail\projet631_p2\data" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Unnamed">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="projet631_p2" />
       <method v="2">
@@ -54,6 +72,22 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <module name="projet631_p2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="java" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="14" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="Main.java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="14" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -94,7 +128,9 @@
       </method>
     </configuration>
     <configuration name="Unnamed" type="Java Scratch" nameIsGenerated="true">
-      <module name="projet631_p2" />
+      <option name="ALTERNATIVE_JRE_PATH" value="14" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <shortenClasspath name="NONE" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -108,10 +144,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="main" type="Java Scratch">
+      <option name="ALTERNATIVE_JRE_PATH" value="14" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <option name="SCRATCH_FILE_URL" value="file://$PROJECT_DIR$/Main.java" />
+      <shortenClasspath name="NONE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="Application.Unnamed" />
+      <item itemvalue="Application.test" />
+      <item itemvalue="Application.java" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Java Scratch.main" />
       <item itemvalue="Java Scratch.Unnamed" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -122,6 +176,9 @@
       <option name="presentableId" value="Default" />
       <updated>1651573847283</updated>
       <workItem from="1651573853745" duration="10201000" />
+      <workItem from="1651588792378" duration="790000" />
+      <workItem from="1651816020593" duration="15481000" />
+      <workItem from="1652094343164" duration="340000" />
     </task>
     <task id="LOCAL-00001" summary="1st push with creation of a Map with character and their frequency">
       <created>1651586625878</created>
@@ -137,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651587003321</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="remove some code">
+      <created>1651588593315</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1651588593315</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,6 +221,27 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1st push with creation of a Map with character and their frequency" />
     <MESSAGE value="add some file" />
-    <option name="LAST_COMMIT_MESSAGE" value="add some file" />
+    <MESSAGE value="remove some code" />
+    <MESSAGE value="Add create list node" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add create list node" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="8" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="n3" />
+        <watch expression="n3" />
+        <watch expression="l_node.get(2).label" />
+        <watch expression="l_node.get(2).label" />
+        <watch expression="l_node" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
