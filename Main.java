@@ -17,6 +17,9 @@ public class Main {
         List<Node>l_node=create_list_node(l_res);
         Node n=Node.create_abr(l_node);
         //System.out.println(n);
+        String str=str_bin("data/extraitalice_comp.bin");
+        Map<String,String> m_res=new HashMap();
+        //System.out.println(n);
 
 
     }
@@ -71,6 +74,37 @@ public class Main {
         System.out.println(l_node);
         return l_node;
     }
+
+
+    public static String str_bin(String file_bin)throws FileNotFoundException,IOException{
+
+        FileInputStream file=new FileInputStream(new File(file_bin));
+        BufferedInputStream buffer=new BufferedInputStream(file);
+
+        int n;
+        String str_res="";
+        while((n=buffer.read())!=-1){
+            //System.out.println(Integer.toBinaryString(n));
+            if(Integer.toBinaryString(n).length()!=8){
+                String str_temp="";
+                String res="";
+                for(int i =0;i<(8-Integer.toBinaryString(n).length());i++){
+                    str_temp+="0";
+                }
+                res=str_temp+Integer.toBinaryString(n);
+                //System.out.println("New version : "+res);
+                str_res+=res;
+            }else{
+
+                str_res+=Integer.toBinaryString(n);
+            }
+
+
+        }
+        buffer.close();
+        return str_res;
+    }
+
 
 
 
