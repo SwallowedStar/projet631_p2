@@ -10,16 +10,27 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        String content=get_content_file("data/extraitalice_freq.txt");
+        String filename="data/extraitalice_freq.txt";
+        String[] words_split = filename.split("/");
+        String [] words2_split=words_split[1].split("_");
+        String file=words2_split[0];
+
+        String content=get_content_file(filename);
 
         Map<String,Integer>l_res=create_list_cara(content);
         //System.out.println(l_res);
         List<Node>l_node=create_list_node(l_res);
         Node n=Node.create_abr(l_node);
         //System.out.println(n);
-        String str=str_bin("data/extraitalice_comp.bin");
+        String str=str_bin("data/"+file+"_comp.bin");
         Map<String,String> m_res=new HashMap();
-        //System.out.println(n);
+        //System .out.println(n);
+        Map<String,String> map=n.parcour_abr("",m_res);
+        //System.out.println(map);
+        //System.out.println(map);
+        //System.out.println(str);
+        String res=recreate_text(map,str);
+
 
 
     }
@@ -104,6 +115,36 @@ public class Main {
         buffer.close();
         return str_res;
     }
+
+
+    public static String recreate_text(Map m, String str_bin){
+        String str_res = "";
+        while (str_bin.length()!=1 && !str_bin.isEmpty() && str_bin!="" ) {
+            //System.out.println(str_bin);
+            Iterator it = m.entrySet().iterator();
+            while(it.hasNext()){
+                Map.Entry<String, String> entry = (Map.Entry)it.next();
+                //System.out.println(entry.getValue());
+                String value = entry.getValue();
+                //System.out.println(str_bin);
+                if(str_bin.startsWith(value)){
+                    //System.out.println("J AI TROUVCER");
+                    //System.out.println(entry.getKey());
+                    String str_n="";
+                    //System .out.println(entry.getKey());
+                    str_n=entry.getKey().replace("\\n","\n");
+                    str_res+=str_n;
+
+
+                    str_bin=str_bin.substring(value.length());
+                }
+            }
+        }
+
+        return str_res;
+    }
+
+
 
 
 
