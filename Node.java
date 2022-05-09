@@ -1,17 +1,42 @@
-public class Node {
+import java.util.*;
+
+
+public class Node implements Comparable<Node> {
     private String label;
     private Node left_child;
     private Node right_child;
-    private String freq;
+    private int freq;
     private String direction;
 
 
-    public Node(String label, String freq) {
+    public Node(String label, int freq) {
         this.label = label;
         this.left_child = left_child;
         this.right_child = right_child;
         this.freq = freq;
         this.direction = direction;
+    }
+
+    public int getFreq()
+    {
+        return this.freq;
+    }
+
+    public void setRightChild(Node right_child){
+        this.right_child = right_child;
+    }
+
+    public void setLeftChild(Node left_child){
+        this.left_child = left_child;
+    }
+
+
+    public int compareTo(Node other) {
+        return this.freq - other.getFreq();
+    }
+
+    public String getLabel() {
+        return label;
     }
 
     @Override
@@ -24,5 +49,13 @@ public class Node {
                 ", direction='" + direction + '\'' +
                 '}';
     }
+
+
+
+
+
+
+
+
 
 }

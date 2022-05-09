@@ -6,18 +6,15 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Node n1=new Node("a","5");
-        //System.out.println(n1);
-        String content=get_content_file("data/extraitalice.txt");
-        Map<Character,Integer>l_res=create_list_cara(content);
-        System.out.println(l_res);
-        /*List<String> l_res2=create_list_freq(content);
-        System.out.println(l_res2);*/
-        create_list_trie(l_res);
+        String content=get_content_file("data/extraitalice_freq.txt");
 
+        Map<String,Integer>l_res=create_list_cara(content);
+        //System.out.println(l_res);
+        List<Node>l_node=create_list_node(l_res);
 
 
     }
@@ -27,14 +24,51 @@ public class Main {
         return content;
     }
 
-    public static Map<Character, Integer> create_list_cara(String content){
+    public static Map<String, Integer> create_list_cara(String content){
+        String lineSeparator = "\r\n";
 
-        Map<Character, Integer> frequency = new HashMap<>();
-        for (char c: content.toCharArray()) {
+        String[] lines = content.split(lineSeparator);
+        Map<String, Integer> frequency = new HashMap<>();
+        System.out.println(lines.length);
+        for(int i = 1; i < lines.length; i++){
+            System.out.println(lines[i]);
+            String[] elements = lines[i].split(" ");
 
-                frequency.put(c, frequency.getOrDefault(c, 0) + 1);
+            if(elements.length == 3){ // If it is a space
+                frequency.put(" ", Integer.valueOf(elements[2].strip()));
             }
-
+            else if(elements.length == 2){
+                frequency.put(elements[0], Integer.valueOf(elements[1].strip()));
+            }
+        }
         return frequency;
     }
+
+    public static List<Node> create_list_node(Map map){
+        List<Node> l_node=new ArrayList<>();
+        Iterator it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<String, Integer> entry = (Map.Entry)it.next();
+
+            Node n1=new Node(entry.getKey(),entry.getValue());
+            l_node.add(n1);
+            //System.out.println(entry.getKey() + " = " + entry.getValue());
+        }
+        System.out.println(l_node);
+        Collections.sort(l_node, new Comparator<Node>() {
+            @Override
+            public int compare(Node o1, Node o2) {
+                return o1.getLabel().compareTo(o2.getLabel());
+            }
+        });
+
+        Collections.sort(l_node);
+
+
+
+        System.out.println(l_node);
+        return l_node;
+    }
+
+
 }
