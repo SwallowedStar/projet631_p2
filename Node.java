@@ -92,6 +92,26 @@ public class Node implements Comparable<Node> {
     }
 
 
+    public Map<String,String> parcour_abr(String res,Map m){
+        String res2;
+        if(this.right_child!=null) {
+            res2=res+"1";
+            this.right_child.parcour_abr(res2,m);
+        }
+        if(this.left_child!=null){
+            res2=res+"0";
+            this.left_child.parcour_abr(res2,m);
+        }
+
+        if(this.right_child==null && this.left_child==null){
+            m.put(this.label,res);
+        }
+
+        return m;
+    }
+
+
+
 
 
 
