@@ -6,73 +6,69 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Node n1=new Node("a","5");
-        //System.out.println(n1);
-        String content=get_content_file("data/extraitalice.txt");
-        Map<Character,Integer>l_res=create_list_cara(content);
-        System.out.println(l_res);
-        /*List<String> l_res2=create_list_freq(content);
-        System.out.println(l_res2);*/
+        String content=get_content_file("data/extraitalice_freq.txt");
 
+        Map<String,Integer>l_res=create_list_cara(content);
+        //System.out.println(l_res);
+        List<Node>l_node=create_list_node(l_res);
 
 
     }
 
-
     public static String get_content_file(String filename) throws Exception{
-        /*File doc =new File(filename);
-        Scanner obj = new Scanner(doc);
-        String str="";
-        while (obj.hasNextLine()){
-            if(obj.hasNextLine()){
-                str+=obj.nextLine();
-            }
-
-        }*/
         String content = new String(Files.readAllBytes(Paths.get(filename)));
-        /*FileReader fr =
-                new FileReader(filename);
-
-        int i;
-        String str="";
-        while ((i=fr.read()) != -1){
-            str+=((char) i);
-        }*/
-
-
         return content;
     }
 
-    public static Map<Character, Integer> create_list_cara(String content){
+    public static Map<String, Integer> create_list_cara(String content){
+        String lineSeparator = "\r\n";
 
-        Map<Character, Integer> frequency = new HashMap<>();
-        for (char c: content.toCharArray()) {
+        String[] lines = content.split(lineSeparator);
+        Map<String, Integer> frequency = new HashMap<>();
+        System.out.println(lines.length);
+        for(int i = 1; i < lines.length; i++){
+            System.out.println(lines[i]);
+            String[] elements = lines[i].split(" ");
 
-                frequency.put(c, frequency.getOrDefault(c, 0) + 1);
+            if(elements.length == 3){ // If it is a space
+                frequency.put(" ", Integer.valueOf(elements[2].strip()));
             }
-
+            else if(elements.length == 2){
+                frequency.put(elements[0], Integer.valueOf(elements[1].strip()));
+            }
+        }
         return frequency;
     }
 
-    /*public static List<String> create_list_freq(String content){
-        List<String> l_freq= new ArrayList<>();
-        List<String> l_cara=new ArrayList<>();
-        for (int i=0;i<content.length();i++){
-            char une_l=content.charAt(i);
-            if(!l_cara.contains(String.valueOf(une_l))){
-                //System.out.println(String.valueOf(une_l));
-                long freq=content.chars().filter(ch->ch==une_l).count();
-                String freq2=String.valueOf(freq);
-                l_cara.add(String.valueOf(une_l));
-                l_freq.add(freq2);
-            }
+    public static List<Node> create_list_node(Map map){
+        List<Node> l_node=new ArrayList<>();
+        Iterator it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<String, Integer> entry = (Map.Entry)it.next();
 
+            Node n1=new Node(entry.getKey(),entry.getValue());
+            l_node.add(n1);
+            //System.out.println(entry.getKey() + " = " + entry.getValue());
         }
+        System.out.println(l_node);
+        Collections.sort(l_node, new Comparator<Node>() {
+            @Override
+            public int compare(Node o1, Node o2) {
+                return o1.getLabel().compareTo(o2.getLabel());
+            }
+        });
 
-        return l_freq;
-    }*/
+        Collections.sort(l_node);
+
+
+
+        System.out.println(l_node);
+        return l_node;
+    }
+
 
 }
