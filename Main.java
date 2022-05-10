@@ -85,9 +85,8 @@ public class Main {
 
             Node n1=new Node(entry.getKey(),entry.getValue());
             l_node.add(n1);
-            //System.out.println(entry.getKey() + " = " + entry.getValue());
         }
-        System.out.println(l_node);
+
         Collections.sort(l_node, new Comparator<Node>() {
             @Override
             public int compare(Node o1, Node o2) {
@@ -99,7 +98,6 @@ public class Main {
 
 
 
-        System.out.println(l_node);
         return l_node;
     }
 
@@ -118,7 +116,6 @@ public class Main {
         int n;
         String str_res="";
         while((n=buffer.read())!=-1){
-            //System.out.println(Integer.toBinaryString(n));
             if(Integer.toBinaryString(n).length()!=8){
                 String str_temp="";
                 String res="";
@@ -126,7 +123,6 @@ public class Main {
                     str_temp+="0";
                 }
                 res=str_temp+Integer.toBinaryString(n);
-                //System.out.println("New version : "+res);
                 str_res+=res;
             }else{
 
@@ -157,10 +153,10 @@ public class Main {
             moyenne+=Integer.valueOf(entry.getValue().length());
             compteur+=1;
         }
-        System.out.println(moyenne/(diviseur*compteur));
+
 
         res=moyenne/(diviseur* compteur);
-        System.out.println(String.format("%.4f", res));
+        System.out.println("Moyenne d'octet : "+String.format("%.4f", res)+" o");
         return res;
 
 
@@ -196,7 +192,7 @@ public class Main {
         double lengh_after=f2.length();
 
         double res=-100*(1-(lengh_after/lenght_before));
-        System.out.println(res);
+        System.out.println("Pourcentage pour la compression : "+res+" %");
         return lenght_before;
     }
 
