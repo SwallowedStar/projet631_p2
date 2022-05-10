@@ -18,28 +18,39 @@ public class Main {
         String content=get_content_file(filename);
 
         Map<String,Integer>l_res=create_list_cara(content);
-        //System.out.println(l_res);
+
         List<Node>l_node=create_list_node(l_res);
         Node n=Node.create_abr(l_node);
-        //System.out.println(n);
+
         String str=str_bin("data/"+file+"_comp.bin");
         Map<String,String> m_res=new HashMap();
-        //System .out.println(n);
-        Map<String,String> map=n.parcour_abr("",m_res);
-        //System.out.println(map);
-        //System.out.println(map);
-        //System.out.println(str);
-        String res=recreate_text(map,str);
 
+        Map<String,String> map=n.parcour_abr("",m_res);
+
+        String res=recreate_text(map,str);
+        write_file(res,file);
+        get_moyenne(map);
 
 
     }
 
+    /**
+     *
+     * @param filename
+     * @return
+     * @throws Exception
+     */
     public static String get_content_file(String filename) throws Exception{
+
         String content = new String(Files.readAllBytes(Paths.get(filename)));
         return content;
     }
 
+    /**
+     *
+     * @param content
+     * @return
+     */
     public static Map<String, Integer> create_list_cara(String content){
         String lineSeparator = "\r\n";
 
@@ -60,6 +71,11 @@ public class Main {
         return frequency;
     }
 
+    /**
+     *
+     * @param map
+     * @return
+     */
     public static List<Node> create_list_node(Map map){
         List<Node> l_node=new ArrayList<>();
         Iterator it = map.entrySet().iterator();
@@ -86,7 +102,13 @@ public class Main {
         return l_node;
     }
 
-
+    /**
+     *
+     * @param file_bin
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public static String str_bin(String file_bin)throws FileNotFoundException,IOException{
 
         FileInputStream file=new FileInputStream(new File(file_bin));
@@ -116,7 +138,12 @@ public class Main {
         return str_res;
     }
 
-
+    /**
+     *
+     * @param m
+     * @param str_bin
+     * @return
+     */
     public static String recreate_text(Map m, String str_bin){
         String str_res = "";
         while (str_bin.length()!=1 && !str_bin.isEmpty() && str_bin!="" ) {
@@ -143,6 +170,49 @@ public class Main {
 
         return str_res;
     }
+
+    /**
+     *
+     * @param map
+     * @return
+     */
+    public static double get_moyenne(Map map){
+        double diviseur=8;
+        double moyenne=0;
+        double compteur= 0;
+        double res=0;
+        Iterator it=map.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry<String, String> entry = (Map.Entry)it.next();
+            moyenne+=Integer.valueOf(entry.getValue().length());
+            compteur+=1;
+        }
+        System.out.println(moyenne/(diviseur*compteur));
+
+        res=moyenne/(diviseur* compteur);
+        System.out.println(String.format("%.4f", res));
+        return res;
+
+
+    }
+
+    /**
+     *
+     * @param str
+     * @param file
+     */
+    public static  void write_file(String str,String file){
+        try {
+            FileWriter myWriter = new FileWriter("res/decompr_"+file+".txt");
+            myWriter.write(str);
+            myWriter.close();
+        }
+        catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
 
 
 

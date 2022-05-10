@@ -22,6 +22,7 @@ public class Node implements Comparable<Node> {
         return this.freq;
     }
 
+
     public void setRightChild(Node right_child){
         this.right_child = right_child;
     }
@@ -31,6 +32,11 @@ public class Node implements Comparable<Node> {
     }
 
 
+    /**
+     *
+     * @param other the object to be compared.
+     * @return
+     */
     public int compareTo(Node other) {
         return this.freq - other.getFreq();
     }
@@ -51,7 +57,11 @@ public class Node implements Comparable<Node> {
     }
 
 
-
+    /**
+     *
+     * @param other
+     * @return
+     */
     public Node fuse(Node other){
         Node parent = new Node(null, this.getFreq() + other.getFreq());
         parent.setRightChild(other);
@@ -60,6 +70,11 @@ public class Node implements Comparable<Node> {
 
     }
 
+    /**
+     *
+     * @param l_node
+     * @return
+     */
     public static Node create_abr(List<Node> l_node){
 
         while (l_node.size()>1){
@@ -92,6 +107,12 @@ public class Node implements Comparable<Node> {
     }
 
 
+    /**
+     *
+     * @param res
+     * @param m
+     * @return
+     */
     public Map<String,String> parcour_abr(String res,Map m){
         String res2;
         if(this.right_child!=null) {
