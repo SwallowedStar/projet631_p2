@@ -34,8 +34,8 @@ public class Node implements Comparable<Node> {
 
     /**
      *
-     * @param other the object to be compared.
-     * @return
+     * @param other the Node to be compared.
+     * @return the difference in frequency between the two nodes, which will be used to sort a list of nodes
      */
     public int compareTo(Node other) {
         return this.freq - other.getFreq();
@@ -59,8 +59,8 @@ public class Node implements Comparable<Node> {
 
     /**
      *
-     * @param other
-     * @return
+     * @param other A node to merge
+     * @return A new node that is the fusion of two nodes and has them as children
      */
     public Node fuse(Node other){
         Node parent = new Node(null, this.getFreq() + other.getFreq());
@@ -72,8 +72,8 @@ public class Node implements Comparable<Node> {
 
     /**
      *
-     * @param l_node
-     * @return
+     * @param l_node A sorted node list
+     * @return A huffman tree
      */
     public static Node create_abr(List<Node> l_node){
 
@@ -85,6 +85,7 @@ public class Node implements Comparable<Node> {
             Node n3=n1.fuse(n2);
             l_node.remove(n1);
             l_node.remove(n2);
+            //This code will insert the new node at the right place
             for(int i=0;i<l_node.size();i++){
                 if(l_node.get(i).getFreq()==n3.getFreq()){
                     l_node.add(i,n3);
@@ -94,13 +95,11 @@ public class Node implements Comparable<Node> {
                 }
 
             }
-
+            //If the new node needs to be inserted at the end of the list
             if(!is_insert){
                 l_node.add(n3);
             }
-            //Collections.sort(l_node);
 
-            //System.out.println(l_node);
         }
 
         return l_node.get(0);
@@ -109,19 +108,19 @@ public class Node implements Comparable<Node> {
 
     /**
      *
-     * @param res
-     * @param m
-     * @return
+     * @param res The encoding of a character
+     * @param m A map ( empty ) which will be filled with its encoding for a character
+     * @return A map which will be filled with its encoding for a character
      */
-    public Map<String,String> parcour_abr(String res,Map m){
+    public Map<String,String> create_map(String res,Map m){
         String res2;
         if(this.right_child!=null) {
             res2=res+"1";
-            this.right_child.parcour_abr(res2,m);
+            this.right_child.create_map(res2,m);
         }
         if(this.left_child!=null){
             res2=res+"0";
-            this.left_child.parcour_abr(res2,m);
+            this.left_child.create_map(res2,m);
         }
 
         if(this.right_child==null && this.left_child==null){
@@ -130,6 +129,41 @@ public class Node implements Comparable<Node> {
 
         return m;
     }
+
+    /**
+     *
+     * @param str_bin A string of binary
+     * @return
+     */
+    public String parcour_abr_2(String str_bin){
+        Node racine=this;
+        String res="";
+        while (str_bin.length()!=1 && !str_bin.isEmpty() && str_bin!="" ){
+            if(str_bin.charAt(0)=='0'){
+                if(racine.left_child !=null){
+                    str_bin=str_bin.substring(1);
+                    racine=racine.left_child;
+
+                }else if(racine.left_child==null){
+
+                    res+=racine.getLabel();
+                    racine=this;
+                }
+            } else if (str_bin.charAt(0)=='1') {
+                if(racine.right_child!=null){
+                    str_bin=str_bin.substring(1);
+                    racine=racine.right_child;
+
+                }else if(racine.right_child==null && racine.left_child==null){
+                    res+=racine.getLabel();
+                    racine=this;
+                }
+            }
+        }
+
+        return res.replace("\\n","\n");
+    }
+
 
 
 

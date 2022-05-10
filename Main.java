@@ -24,19 +24,20 @@ public class Main {
 
         String str=str_bin("data/"+file+"_comp.bin");
         Map<String,String> m_res=new HashMap();
+        Map<String,String> map=n.create_map("",m_res);
+        String res4=n.parcour_abr_2(str);
 
-        Map<String,String> map=n.parcour_abr("",m_res);
-
-        String res=recreate_text(map,str);
-        write_file(res,file);
+        write_file(res4,file);
         get_moyenne(map);
+
+        get_compression(file);
 
 
     }
 
     /**
      *
-     * @param filename
+     * @param filename the name of the file
      * @return
      * @throws Exception
      */
@@ -48,17 +49,17 @@ public class Main {
 
     /**
      *
-     * @param content
-     * @return
+     * @param content The content of the ****_freq.txt file
+     * @return a map of character and their frequency
      */
     public static Map<String, Integer> create_list_cara(String content){
         String lineSeparator = "\r\n";
 
         String[] lines = content.split(lineSeparator);
         Map<String, Integer> frequency = new HashMap<>();
-        System.out.println(lines.length);
+        //System.out.println(lines.length);
         for(int i = 1; i < lines.length; i++){
-            System.out.println(lines[i]);
+            //System.out.println(lines[i]);
             String[] elements = lines[i].split(" ");
 
             if(elements.length == 3){ // If it is a space
@@ -73,8 +74,8 @@ public class Main {
 
     /**
      *
-     * @param map
-     * @return
+     * @param map A map of the character and their frequency
+     * @return a sorted list of Node
      */
     public static List<Node> create_list_node(Map map){
         List<Node> l_node=new ArrayList<>();
@@ -104,8 +105,8 @@ public class Main {
 
     /**
      *
-     * @param file_bin
-     * @return
+     * @param file_bin name of the compressed file
+     * @return A string wich contains the content of the compressed file
      * @throws FileNotFoundException
      * @throws IOException
      */
@@ -138,42 +139,11 @@ public class Main {
         return str_res;
     }
 
-    /**
-     *
-     * @param m
-     * @param str_bin
-     * @return
-     */
-    public static String recreate_text(Map m, String str_bin){
-        String str_res = "";
-        while (str_bin.length()!=1 && !str_bin.isEmpty() && str_bin!="" ) {
-            //System.out.println(str_bin);
-            Iterator it = m.entrySet().iterator();
-            while(it.hasNext()){
-                Map.Entry<String, String> entry = (Map.Entry)it.next();
-                //System.out.println(entry.getValue());
-                String value = entry.getValue();
-                //System.out.println(str_bin);
-                if(str_bin.startsWith(value)){
-                    //System.out.println("J AI TROUVCER");
-                    //System.out.println(entry.getKey());
-                    String str_n="";
-                    //System .out.println(entry.getKey());
-                    str_n=entry.getKey().replace("\\n","\n");
-                    str_res+=str_n;
 
-
-                    str_bin=str_bin.substring(value.length());
-                }
-            }
-        }
-
-        return str_res;
-    }
 
     /**
      *
-     * @param map
+     * @param map A map with character and their encoding
      * @return
      */
     public static double get_moyenne(Map map){
@@ -197,9 +167,9 @@ public class Main {
     }
 
     /**
-     *
-     * @param str
-     * @param file
+     * This function write the decoded content in a text file
+     * @param str A string that contain the decoded content
+     * @param file name of the file
      */
     public static  void write_file(String str,String file){
         try {
@@ -211,6 +181,23 @@ public class Main {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+    }
+
+    /**
+     *
+     * @param file the name of the file
+     * @return  The difference between before and after decompression
+     */
+    public static double get_compression(String file){
+        File f =new File("data/"+file+"_comp.bin");
+        double lenght_before=f.length();
+
+        File f2=new File("res/decompr_"+file+".txt");
+        double lengh_after=f2.length();
+
+        double res=-100*(1-(lengh_after/lenght_before));
+        System.out.println(res);
+        return lenght_before;
     }
 
 
