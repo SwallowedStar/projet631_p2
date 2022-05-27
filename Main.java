@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        String filename="data/extraitalice_freq.txt";
+        String filename="data/alice_freq.txt";
         String[] words_split = filename.split("/");
         String [] words2_split=words_split[1].split("_");
         String file=words2_split[0];
@@ -20,11 +20,15 @@ public class Main {
         Map<String,Integer>l_res=create_list_cara(content);
 
         List<Node>l_node=create_list_node(l_res);
+
         Node n=Node.create_abr(l_node);
 
-        String str=str_bin("data/"+file+"_comp.bin");
+        String str=str_bin("data/"+file+"_comp.bin",file);
+
         Map<String,String> m_res=new HashMap();
+
         Map<String,String> map=n.create_map("",m_res);
+
         String res4=n.parcour_abr_2(str);
 
         write_file(res4,file);
@@ -38,7 +42,7 @@ public class Main {
     /**
      *
      * @param filename the name of the file
-     * @return
+     * @return content of the ****_freq file
      * @throws Exception
      */
     public static String get_content_file(String filename) throws Exception{
@@ -57,9 +61,9 @@ public class Main {
 
         String[] lines = content.split(lineSeparator);
         Map<String, Integer> frequency = new HashMap<>();
-        //System.out.println(lines.length);
+
         for(int i = 1; i < lines.length; i++){
-            //System.out.println(lines[i]);
+
             String[] elements = lines[i].split(" ");
 
             if(elements.length == 3){ // If it is a space
@@ -86,7 +90,6 @@ public class Main {
             Node n1=new Node(entry.getKey(),entry.getValue());
             l_node.add(n1);
         }
-
         Collections.sort(l_node, new Comparator<Node>() {
             @Override
             public int compare(Node o1, Node o2) {
@@ -95,9 +98,6 @@ public class Main {
         });
 
         Collections.sort(l_node);
-
-
-
         return l_node;
     }
 
@@ -108,41 +108,43 @@ public class Main {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public static String str_bin(String file_bin)throws FileNotFoundException,IOException{
+    public static String str_bin(String file_bin,String file_name)throws FileNotFoundException,IOException{
 
         FileInputStream file=new FileInputStream(new File(file_bin));
         BufferedInputStream buffer=new BufferedInputStream(file);
 
         int n;
+        int pass=0;
         String str_res="";
+
         while((n=buffer.read())!=-1){
-            if(Integer.toBinaryString(n).length()!=8){
-                String str_temp="";
-                String res="";
-                for(int i =0;i<(8-Integer.toBinaryString(n).length());i++){
-                    str_temp+="0";
+                    if(pass==0){
+                        pass++;
+                        str_res+=Integer.toBinaryString(n);
+                    }else{
+                        if(Integer.toBinaryString(n).length()!=8){
+                            String str_temp="";
+                            String res="";
+                            for(int i =0;i<(8-Integer.toBinaryString(n).length());i++){
+                                str_temp+="0";
+                            }
+                            res=Integer.toBinaryString(n);
+                            str_res+=(str_temp+res);
+                        }else{
+
+                            str_res+=Integer.toBinaryString(n);
+                        }
+                    }
                 }
-                res=str_temp+Integer.toBinaryString(n);
-                str_res+=res;
-            }else{
-
-                str_res+=Integer.toBinaryString(n);
-            }
-
-
-        }
         buffer.close();
         return str_res;
     }
 
-
-
     /**
-     *
+     * This function show the byte average of the characters
      * @param map A map with character and their encoding
-     * @return
      */
-    public static double get_moyenne(Map map){
+    public static void get_moyenne(Map map){
         double diviseur=8;
         double moyenne=0;
         double compteur= 0;
@@ -157,7 +159,7 @@ public class Main {
 
         res=moyenne/(diviseur* compteur);
         System.out.println("Moyenne d'octet : "+String.format("%.4f", res)+" o");
-        return res;
+
 
 
     }

@@ -79,6 +79,7 @@ public class Node implements Comparable<Node> {
 
         while (l_node.size()>1){
             Boolean is_insert=false;
+
             Node n1=l_node.get(0);
 
             Node n2=l_node.get(1);
@@ -131,20 +132,25 @@ public class Node implements Comparable<Node> {
     }
 
     /**
-     *
+     * This function go through the tree to reconstitute the original text
      * @param str_bin A string of binary
-     * @return
+     * @return the content decode
      */
     public String parcour_abr_2(String str_bin){
         Node racine=this;
         String res="";
-        while (str_bin.length()!=1 && !str_bin.isEmpty() && str_bin!="" ){
+        int stop=0;
+        str_bin=str_bin+"0";
+        while (str_bin.length()>0){
+            if(str_bin.equals("")){
+                stop++;
+            }
             if(str_bin.charAt(0)=='0'){
                 if(racine.left_child !=null){
                     str_bin=str_bin.substring(1);
                     racine=racine.left_child;
 
-                }else if(racine.left_child==null){
+                }else if(racine.left_child==null && racine.right_child==null ){
 
                     res+=racine.getLabel();
                     racine=this;
@@ -158,6 +164,10 @@ public class Node implements Comparable<Node> {
                     res+=racine.getLabel();
                     racine=this;
                 }
+            }
+
+            if(stop==1){
+                break;
             }
         }
 
