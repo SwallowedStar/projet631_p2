@@ -6,7 +6,7 @@ public class Node implements Comparable<Node> {
     private Node left_child;
     private Node right_child;
     private int freq;
-    private String direction;
+
 
 
     public Node(String label, int freq) {
@@ -14,7 +14,7 @@ public class Node implements Comparable<Node> {
         this.left_child = left_child;
         this.right_child = right_child;
         this.freq = freq;
-        this.direction = direction;
+
     }
 
     public int getFreq()
@@ -52,7 +52,6 @@ public class Node implements Comparable<Node> {
                 ", left_child=" + left_child +
                 ", right_child=" + right_child +
                 ", freq='" + freq + '\'' +
-                ", direction='" + direction + '\'' +
                 '}';
     }
 
@@ -100,6 +99,7 @@ public class Node implements Comparable<Node> {
             if(!is_insert){
                 l_node.add(n3);
             }
+
 
         }
 

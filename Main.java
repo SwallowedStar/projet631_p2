@@ -7,10 +7,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
-
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws Exception {
-        String filename="data/alice_freq.txt";
+        Scanner reader = new Scanner(System.in);  // Reading from System.in
+        System.out.println("Enter the name of the file : ");
+        String str_user = reader.next(); // Scans the next token of the input as an int.
+        reader.close();
+        String filename="data/"+str_user+"_freq.txt";
         String[] words_split = filename.split("/");
         String [] words2_split=words_split[1].split("_");
         String file=words2_split[0];
@@ -28,6 +32,7 @@ public class Main {
         Map<String,String> m_res=new HashMap();
 
         Map<String,String> map=n.create_map("",m_res);
+
 
         String res4=n.parcour_abr_2(str);
 
