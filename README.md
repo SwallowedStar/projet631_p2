@@ -6,6 +6,7 @@ Java 14.
 
 # How to use it ?
 First,you have to download all the file of the git.Then,you can copy a texte file which contains each character and their frequency, as shown below.
+
 ![image](https://user-images.githubusercontent.com/90306508/170878406-1ce49ca1-e5d4-4373-b0fc-e4799b64b13a.png)
 
 After that, you will also have to add the compressed file with a particular naming, nameofthefile_comp.bin, as in the picture above.
